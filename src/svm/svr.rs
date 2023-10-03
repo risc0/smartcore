@@ -106,7 +106,8 @@ pub struct SVRParameters<T: Number + FloatNumber + PartialOrd> {
 pub struct SVR<'a, T: Number + FloatNumber + PartialOrd, X: Array2<T>, Y: Array1<T>> {
     instances: Option<Vec<Vec<f64>>>,
     #[cfg_attr(feature = "serde", serde(skip_deserializing))]
-    parameters: Option<&'a SVRParameters<T>>,
+    // Changing parameters to be public field allows for the parameters to be reinsterted into the SVR struct after deserialization
+    pub parameters: Option<&'a SVRParameters<T>>,
     w: Option<Vec<T>>,
     b: T,
     phantom: PhantomData<(X, Y)>,
